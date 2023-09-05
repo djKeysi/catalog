@@ -9,12 +9,13 @@
 
                 <div class="col-3">
                     <div class="card mb-4 box-shadow">
-
+                        <img class="card-img-top"
+                             data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail"
+                             alt="Card image cap">
                         <div class="card-body">
                             {{ object| truncatechars:100 }}
                             <div class="card-header">
-                                <a href="{% url 'main:category_products' object.pk %}" type="button"
-                                   class="btn btn-sm btn-outline-secondary">к продуктам</a>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">к продуктам</button>
                             </div>
 
                         </div>
@@ -23,5 +24,4 @@
             {% endfor %}
         </div>
     </div>
-
 {% endblock %}
