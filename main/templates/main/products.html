@@ -11,10 +11,9 @@
 
 
                 <div class="col-3">
+
                     <div class="card mb-4 box-shadow">
-                        <img class="card-img-top"
-                             src="/media/ {{ object.picture | mymedia }}"
-                             alt="Card image cap">
+                        <img class="bd-placeholder-img card-img-top" src="{{object.picture|mymedia}}">
                         <div class="card-body">
                             {{ object| truncatechars:100 }}
                             <div class="card-header">
