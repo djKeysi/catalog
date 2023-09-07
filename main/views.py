@@ -1,7 +1,12 @@
+
+
 from django.shortcuts import render
 
 from main.models import Student
-
+from  django.views.generic import ListView,DetailView
+class StudentListView(ListView):
+    model = Student
+    template_name='main'
 
 # def home(request):
 #     return render(request,'main/home.html')
@@ -15,13 +20,13 @@ from main.models import Student
 #     return render(request,'main/contacts.html')
 
 
-def home(request):
-    students_list = Student.objects.all()
-    context ={
-        'object_list': students_list,
-        'title':'Главная'
-    }
-    return render(request,'main/home.html',context)
+# def home(request):
+#     students_list = Student.objects.all()
+#     context ={
+#         'object_list': students_list,
+#         'title':'Главная'
+#     }
+#     return render(request,'main/home.html',context)
 
 def contact(request):
     if request.method == 'POST':
@@ -33,5 +38,11 @@ def contact(request):
         'title': 'Контакты'
     }
     return render(request,'main/contact.html',context)
+
+class StudentDetailView(DetailView):
+    model = Student
+    template_name = 'main/student_detail.html'
+
+
 
 
