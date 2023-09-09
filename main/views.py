@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic import ListView
 
 from main.models import Student
 
@@ -13,15 +14,19 @@ from main.models import Student
 #         message = request.POST.get('message')
 #         print(f'You have new message from {name}({phone}): {message}')
 #     return render(request,'main/contacts.html')
+class StudentListView(ListView):
+    model = Student
+    template_name = 'main/home.html'
 
 
-def home(request):
-    students_list = Student.objects.all()
-    context ={
-        'object_list': students_list,
-        'title':'Главная'
-    }
-    return render(request,'main/home.html',context)
+
+# def home(request):
+#     students_list = Student.objects.all()
+#     context ={
+#         'object_list': students_list,
+#         'title':'Главная'
+#     }
+#     return render(request,'main/home.html',context)
 
 def contact(request):
     if request.method == 'POST':
