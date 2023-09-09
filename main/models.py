@@ -2,6 +2,19 @@ from django.db import models
 
 NULLABLE = {'blank':True,'null':True}
 
+# class Students(models.Model):
+#     name = models.CharField(max_length=100, verbose_name='Наименование')
+#     discription = models.TextField(verbose_name='Описание')
+#
+#     def __str__(self):
+#         return f'{self.name} {self.discription}'
+#
+#     class Meta:
+#         verbose_name = 'категория'
+#         verbose_name_plural = 'категории'
+
+
+
 class Student(models.Model):
     first_name=models.CharField(max_length=100, verbose_name='имя')
     last_name=models.CharField(max_length=100, verbose_name='фамилия')
@@ -16,3 +29,6 @@ class Student(models.Model):
         verbose_name = 'студент'
         verbose_name_plural = 'студенты'
         ordering = ('last_name',)
+
+
+
