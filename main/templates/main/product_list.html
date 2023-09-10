@@ -1,23 +1,24 @@
 {% extends 'main/base.html' %}
-{% load my_tags %}
 {% block content %}
 
     <div class="container">
-
         <h1 class="text-center">Каталог</h1><br>
         <div class="row text-center">
-
             {% for object in object_list %}
 
 
                 <div class="col-3">
-
                     <div class="card mb-4 box-shadow">
-                        <img class="bd-placeholder-img card-img-top" src="{{object.picture|mymedia}}" alt="картинка не загружена">
+
                         <div class="card-body">
-                            {{ object| truncatechars:100 }}
+                            <p>
+                            {{ object.name }}<br>
+                                {{ object.discription | truncatechars:100  }}<br>
+
+                            </p>
                             <div class="card-header">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">к продуктам</button>
+                                <a href="{% url 'main:category_products' object.pk %}" type="button"
+                                   class="btn btn-sm btn-outline-secondary">к продуктам</a>
                             </div>
 
                         </div>
@@ -26,4 +27,5 @@
             {% endfor %}
         </div>
     </div>
+
 {% endblock %}

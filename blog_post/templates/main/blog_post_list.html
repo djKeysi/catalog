@@ -2,20 +2,23 @@
 {% block content %}
 
     <div class="container">
-        <h1 class="text-center">Каталог</h1><br>
+        <h1 class="text-center">Блоговые записи</h1><br>
         <div class="row text-center">
             {% for object in object_list %}
 
 
                 <div class="col-3">
                     <div class="card mb-4 box-shadow">
-                        <img class="card-img-top"
-                             data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail"
-                             alt="Card image cap">
+
                         <div class="card-body">
-                            {{ object| truncatechars:100 }}
+                            <p>
+                            {{ object.name }}<br>
+                                {{ object.discription | truncatechars:100  }}<br>
+
+                            </p>
                             <div class="card-header">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">к продуктам</button>
+                                <a href="{% url 'main:category_products' object.pk %}" type="button"
+                                   class="btn btn-sm btn-outline-secondary">к продуктам</a>
                             </div>
 
                         </div>
@@ -24,4 +27,5 @@
             {% endfor %}
         </div>
     </div>
+
 {% endblock %}
