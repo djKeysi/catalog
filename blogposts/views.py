@@ -46,7 +46,7 @@ class BlogPostDeleteView(DeleteView):
 
 class BlogPostUpdateView(UpdateView):
     model = BlogPost
-    fields = ('title', 'body',)
+    fields = ('title', 'body','picture')
 
     def form_valid(self, form):
         if form.is_valid():
