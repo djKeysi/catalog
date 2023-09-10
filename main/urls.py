@@ -2,7 +2,7 @@
 from django.urls import path
 
 from main.apps import MainConfig
-from main.views import  contacts,   ProductListView,ProductDetailView
+from main.views import  ProductListView,ProductDetailView,contacts
 
 app_name = MainConfig.name
 
@@ -13,4 +13,5 @@ urlpatterns = [
     #path('<int:pk>/products/', CategoryListView.as_view(), name = 'category_products')
     #path('view/<int:pk>/', ProductCreateView.as_view(), name='category_products'),
     path('view/<int:pk>/',ProductDetailView.as_view(),name='category_products'),
+    #path(r'^post/(?P<pk>\d+)/$', PostView.as_view(),name = 'contacts')
 ]

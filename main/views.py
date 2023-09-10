@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView,DetailView
@@ -32,6 +33,18 @@ def contacts(request):
         message = request.POST.get('message')
         print(f'You have new message from {name}({phone}): {message}')
     return render(request, 'main/contacts.html')
+
+# class PostView(DetailView):
+#     model = Product
+#     context_object_name = 'post'
+#     template_name = 'private_post_detal.html'
+
+    # def get_object(self):
+    #     object = super(PostView, self).get_object()
+    #     if not self.request.user.is_authenticated():
+    #         raise Http404
+    #     return object
+
 
 # def categories(request):
 #     category_list = Category.objects.all()
