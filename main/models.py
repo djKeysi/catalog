@@ -22,6 +22,7 @@ class Product(models.Model):
     data_create = models.DateTimeField(auto_now_add=True, blank=True, verbose_name='дата создания')
     last_modified_date = models.DateTimeField(auto_now=True, blank=True,
                                               verbose_name='дата последнего изменения')  # c установкой при изменении
+    phone = models.TextField(max_length=11, verbose_name='Телефон',null=True, blank=True)
 
     # created_at = models.CharField(max_length=100, verbose_name='Создание', null=True, blank=True)
     def __str__(self):

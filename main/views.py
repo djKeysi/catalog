@@ -26,14 +26,19 @@ class ProductDetailView(DetailView):
    # fields = ('name', 'price_for_buy')
     #success_url = reverse_lazy('main:index')
 
-def contacts(request):
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        phone = request.POST.get('phone')
-        message = request.POST.get('message')
-        print(f'You have new message from {name}({phone}): {message}')
-    return render(request, 'main/contacts.html')
+# def contacts(request):
+#     if request.method == 'POST':
+#         name = request.POST.get('name')
+#         phone = request.POST.get('phone')
+#         message = request.POST.get('message')
+#         print(f'You have new message from {name}({phone}): {message}')
+#     return render(request, 'main/contacts.html')
 
+class ContactCreateView(CreateView):
+    model = Product
+    fields = ('name', 'phone','discription')#discription это message
+    template_name = 'main/contacts.html'
+    success_url = reverse_lazy('main:contacts')
 # class PostView(DetailView):
 #     model = Product
 #     context_object_name = 'post'
