@@ -1,9 +1,10 @@
+from django.forms import inlineformset_factory
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
-from main.forms import StudentForm
-from main.models import Student
+from main.forms import StudentForm, SubjectForm
+from main.models import Student, Subject
 
 
 # def home(request):
@@ -40,6 +41,25 @@ class StudentUpdateView(UpdateView):
     #fields = ('first_name', 'last_name', 'avatar')
 
     success_url = reverse_lazy('main:index')
+
+    def get_context_data(self, **kwargs):
+        context_data= super().get_context_data(**kwargs)
+        SubjectFormSet=inlineformset_factory(Student,Subject,form=SubjectForm,extra=1)
+        if self.request.method=='POST':
+            context_data['formset'] = SubjectFormSet(self.request.POST,instance=self.object)
+        else:
+            context_data['formset'] = SubjectFormSet(instance=self.object)
+        return  context_data
+
+    def form_valid(self, form):
+        formset = self.get_context_data()['formset']
+        self.object = form.save()
+        if formset.is_valid():
+            formset.instance = self.object
+            form.save()
+
+        return  super().form_valid(form)
+
 
 class StudentDeleteView(DeleteView):
     model = Student

@@ -2,24 +2,38 @@
 
 {% block content %}
     <div class="col-12">
-        <div class="row">
+        <form class="row" method="post" enctype="multipart/form-data">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6">
+
+
+                        <div class="card">
+                            <h2 class="card-title"> Добавление студента</h2>
+                            <div class="card-body">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <button type="submit" class="btn btn-sm btn-outline-secondary">Создать</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer"></div>
+                </div>
+            </div>
             <div class="col-6">
                 <div class="card">
-                    <h2 class="card-title"> Добавление студента</h2>
+                    <h3 class="card-title"> Предметы студента</h3>
                     <div class="card-body">
-                        <form method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
+                       {{ formset.management_form }}
+                        {% for form in formset.forms %}
                             {{ form.as_p }}
-                             <button type="submit" class="btn btn-sm btn-outline-secondary">Создать</button>
 
-                        </form>
+                        {% endfor %}
+
                     </div>
-
-
                 </div>
 
             </div>
-            <div class="footer"></div>
-        </div>
+        </form>
     </div>
 {% endblock %}
