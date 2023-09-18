@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
+from main.forms import StudentForm
 from main.models import Student
 
 
@@ -27,14 +28,17 @@ class StudentDetailView(DetailView):
 
 class StudentCreateView(CreateView):
     model = Student
+    form_class = StudentForm
     # template_name = 'main/student_form.html'
-    fields = ('first_name', 'last_name', 'avatar')
+
     success_url = reverse_lazy('main:index')
 
 class StudentUpdateView(UpdateView):
     model = Student
+    form_class = StudentForm
     # template_name = 'main/student_form.html'
-    fields = ('first_name', 'last_name', 'avatar')
+    #fields = ('first_name', 'last_name', 'avatar')
+
     success_url = reverse_lazy('main:index')
 
 class StudentDeleteView(DeleteView):
