@@ -44,6 +44,7 @@ class BlogPostDeleteView(DeleteView):
     success_url = reverse_lazy('blogpost:list')
 
 
+
 class BlogPostUpdateView(UpdateView):
     model = BlogPost
     fields = ('title', 'body','picture')
