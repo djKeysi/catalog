@@ -1,9 +1,10 @@
 from django.http import Http404
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView,DetailView
+from django.views.generic import ListView, DetailView, CreateView, DetailView, UpdateView, DeleteView
 
-from main.models import Category, Product
+from main.forms import ProductForm, VersionForm
+from main.models import Category, Product, Version
 
 
 # def home(request): ProductListView
@@ -15,6 +16,25 @@ from main.models import Category, Product
 
 class ProductListView(ListView):
     model = Product
+    #form_class = VersionForm
+
+class VersionDetailView(DetailView):
+    model = Version
+
+
+class ProductCreateView(CreateView):
+    model = Product
+    form_class = ProductForm
+    success_url = reverse_lazy('main:home')
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    form_class = ProductForm
+    success_url = reverse_lazy('main:home')
+
+class ProductDeleteView(DeleteView):
+    model = Product
+    success_url = reverse_lazy('main:home')
 
 
 # class CategoryListView(ListView):

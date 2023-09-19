@@ -3,6 +3,9 @@
 
     <div class="container">
         <h1 class="text-center">Каталог</h1><br>
+        <div class="col-12">
+            <a href="{% url 'main:product_create' %}" class="btn btn-primary mb-5"> Создать продукт</a>
+        </div>
         <div class="row text-center">
             {% for object in object_list %}
 
@@ -11,14 +14,22 @@
                     <div class="card mb-4 box-shadow">
 
                         <div class="card-body">
+                            {# {% if object.is_active %} #}
                             <p>
-                            {{ object.name }}<br>
-                                {{ object.discription | truncatechars:100  }}<br>
+                                {{ object.name }}<br>
+                                {{ object.discription | truncatechars:100 }}<br>
 
                             </p>
+                            {#  {% endif %} #}
+
                             <div class="card-header">
                                 <a href="{% url 'main:category_products' object.pk %}" type="button"
-                                   class="btn btn-sm btn-outline-secondary">к продуктам</a>
+                                   class="btn btn-sm btn-outline-secondary">Просмотр продукта</a>
+                                 <a href="{% url 'main:product_update' object.pk %}" type="button"
+                                   class="btn btn-sm btn-outline-secondary">Изменить продукт</a>
+                                <a href="{% url 'main:product_delete' object.pk %}" type="button"
+                                   class="btn btn-sm btn-outline-secondary">Удалить продукт</a>
+
                             </div>
 
                         </div>

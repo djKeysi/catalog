@@ -1,5 +1,6 @@
 from django.db import models
 
+NULLABLE = {'blank': True, 'null': True}
 
 class Category(models.Model):
     name = models.CharField(max_length=100, verbose_name='Наименование')
@@ -15,14 +16,14 @@ class Category(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=100, verbose_name='Наименование')
-    discription = models.TextField(max_length=200, verbose_name='Описание')
-    picture = models.ImageField(upload_to='pics/', null=True, blank=True, verbose_name='Изображение')
+    discription = models.TextField(max_length=200, verbose_name='Описание продукта')
+    picture = models.ImageField(upload_to='pics/', **NULLABLE, verbose_name='Изображение')
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     price_for_buy = models.IntegerField(verbose_name='цена за покупку')
     data_create = models.DateTimeField(auto_now_add=True, blank=True, verbose_name='дата создания')
     last_modified_date = models.DateTimeField(auto_now=True, blank=True,
                                               verbose_name='дата последнего изменения')  # c установкой при изменении
-    phone = models.TextField(max_length=11, verbose_name='Телефон',null=True, blank=True)
+    phone = models.CharField(max_length=11, verbose_name='Телефон',**NULLABLE)
 
     # created_at = models.CharField(max_length=100, verbose_name='Создание', null=True, blank=True)
     def __str__(self):
@@ -31,3 +32,15 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'продукт'
         verbose_name_plural = 'продукты'
+
+class Version(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    number_version = models.IntegerField(verbose_name='номер версии')
+    name_version = models.CharField(max_length=100, verbose_name='название версии')
+    flag_of_the_current_version = models.BooleanField(verbose_name='признак текущей версии')
+    def __str__(self):
+        return f'{self.product}{self.number_version}{self.name_version}{self.flag_of_the_current_version}'
+
+    class Meta:
+        verbose_name = 'версия'
+        verbose_name_plural = 'версии'
