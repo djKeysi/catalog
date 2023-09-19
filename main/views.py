@@ -17,9 +17,17 @@ from main.models import Category, Product, Version
 class ProductListView(ListView):
     model = Product
     #form_class = VersionForm
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        products = Version.objects.all()
+        for product in products:
+            product.flag_of_the_current_version = True
+        context['products'] = products
+        return context
 
-class VersionDetailView(DetailView):
-    model = Version
+
+# class VersionDetailView(DetailView):
+#     model = Version
 
 
 class ProductCreateView(CreateView):
