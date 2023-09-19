@@ -19,9 +19,15 @@
                                 {{ object.name }}<br>
                                 {{ object.discription | truncatechars:100 }}<br>
 
+                                {% for j in products %}
 
-                                    {{ products.flag_of_the_current_version }}
+                                    {% if  j.flag_of_the_current_version %}
+                                        <p>Активная версия: {{ j.name_version }}</p>
+                                    {% else %}
+                                        <p>Нет активной версии</p>
+                                    {% endif %}
 
+                                {% endfor %}
 
                             </p>
                             {#  {% endif %} #}
@@ -29,7 +35,7 @@
                             <div class="card-header">
                                 <a href="{% url 'main:category_products' object.pk %}" type="button"
                                    class="btn btn-sm btn-outline-secondary">Просмотр продукта</a>
-                                 <a href="{% url 'main:product_update' object.pk %}" type="button"
+                                <a href="{% url 'main:product_update' object.pk %}" type="button"
                                    class="btn btn-sm btn-outline-secondary">Изменить продукт</a>
                                 <a href="{% url 'main:product_delete' object.pk %}" type="button"
                                    class="btn btn-sm btn-outline-secondary">Удалить продукт</a>

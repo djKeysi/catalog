@@ -20,8 +20,8 @@ class ProductListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         products = Version.objects.all()
-        for product in products:
-            product.flag_of_the_current_version = True
+        # for product in products:
+        #     product = product.flag_of_the_current_version.filter(is_active=True).first()
         context['products'] = products
         return context
 
