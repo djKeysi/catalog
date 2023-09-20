@@ -34,7 +34,8 @@ class Product(models.Model):
         verbose_name_plural = 'продукты'
 
 class Version(models.Model):
-    product = models.ManyToManyField(Product, related_name='versions', blank=True)
+    #product = models.ManyToManyField(Product, related_name='versions', blank=True)
+    product = models.ForeignKey(Product,related_name='versions', on_delete=models.CASCADE,**NULLABLE)
     number_version = models.IntegerField(verbose_name='номер версии')
     name_version = models.CharField(max_length=100, verbose_name='название версии')
     flag_of_the_current_version = models.BooleanField(default=False,verbose_name='признак текущей версии')

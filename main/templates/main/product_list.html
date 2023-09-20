@@ -7,7 +7,9 @@
             <a href="{% url 'main:product_create' %}" class="btn btn-primary mb-5"> Создать продукт</a>
         </div>
         <div class="row text-center">
-            {% for object in object_list %}
+
+
+            {% for object in products %}
 
 
                 <div class="col-3">
@@ -20,14 +22,13 @@
                                 {{ object.discription | truncatechars:100 }}<br>
 
 
+                                {% if  object.active_version %}
+                                    <p>Активная версия: {{ object.active_version.name_version }}</p>
 
-                                    {% if  products.active_version %}
-                                        <p>Активная версия: {{ product.active_version.name_version }}</p>
+                                {% else %}
 
-                                    {% else %}
-                                        <p>Нет активной версии</p>
-                                    {% endif %}
-
+                                    <p>Нет активной версии</p>
+                                {% endif %}
 
 
                             </p>
