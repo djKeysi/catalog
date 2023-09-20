@@ -16,12 +16,13 @@ from main.models import Category, Product, Version
 
 class ProductListView(ListView):
     model = Product
-    #form_class = VersionForm
+
+    # form_class = VersionForm
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        products = Version.objects.all()
-        # for product in products:
-        #     product = product.flag_of_the_current_version.filter(is_active=True).first()
+        products = Product.objects.all()
+        for product in products:
+            product.active_version = product.versions.filter(flag_of_the_current_version=True).first()
         context['products'] = products
         return context
 
@@ -35,10 +36,12 @@ class ProductCreateView(CreateView):
     form_class = ProductForm
     success_url = reverse_lazy('main:home')
 
+
 class ProductUpdateView(UpdateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('main:home')
+
 
 class ProductDeleteView(DeleteView):
     model = Product
@@ -51,8 +54,10 @@ class ProductDeleteView(DeleteView):
 class ProductDetailView(DetailView):
     model = Product
     # template_name = 'main/student_form.html'
-   # fields = ('name', 'price_for_buy')
-    #success_url = reverse_lazy('main:index')
+
+
+# fields = ('name', 'price_for_buy')
+# success_url = reverse_lazy('main:index')
 
 # def contacts(request):
 #     if request.method == 'POST':
@@ -64,7 +69,7 @@ class ProductDetailView(DetailView):
 
 class ContactCreateView(CreateView):
     model = Product
-    fields = ('name', 'phone','discription')#discription это message
+    fields = ('name', 'phone', 'discription')  # discription это message
     template_name = 'main/contacts.html'
     success_url = reverse_lazy('main:contacts')
 # class PostView(DetailView):
@@ -72,11 +77,11 @@ class ContactCreateView(CreateView):
 #     context_object_name = 'post'
 #     template_name = 'private_post_detal.html'
 
-    # def get_object(self):
-    #     object = super(PostView, self).get_object()
-    #     if not self.request.user.is_authenticated():
-    #         raise Http404
-    #     return object
+# def get_object(self):
+#     object = super(PostView, self).get_object()
+#     if not self.request.user.is_authenticated():
+#         raise Http404
+#     return object
 
 
 # def categories(request):

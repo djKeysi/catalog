@@ -15,7 +15,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Version)
 class VersionAdmin(admin.ModelAdmin):
-    list_display = ('product','number_version', 'name_version','flag_of_the_current_version')
+    list_display = ('pk','number_version', 'name_version','flag_of_the_current_version')
 
 
 

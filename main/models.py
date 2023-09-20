@@ -34,12 +34,12 @@ class Product(models.Model):
         verbose_name_plural = 'продукты'
 
 class Version(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ManyToManyField(Product, related_name='versions', blank=True)
     number_version = models.IntegerField(verbose_name='номер версии')
     name_version = models.CharField(max_length=100, verbose_name='название версии')
-    flag_of_the_current_version = models.BooleanField(verbose_name='признак текущей версии')
+    flag_of_the_current_version = models.BooleanField(default=False,verbose_name='признак текущей версии')
     def __str__(self):
-        return f'{self.product}{self.number_version}{self.name_version}{self.flag_of_the_current_version}'
+        return f'{self.name_version}'
 
     class Meta:
         verbose_name = 'версия'

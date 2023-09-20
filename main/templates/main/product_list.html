@@ -19,15 +19,16 @@
                                 {{ object.name }}<br>
                                 {{ object.discription | truncatechars:100 }}<br>
 
-                                {% for j in products %}
 
-                                    {% if  j.flag_of_the_current_version %}
-                                        <p>Активная версия: {{ j.name_version }}</p>
+
+                                    {% if  products.active_version %}
+                                        <p>Активная версия: {{ product.active_version.name_version }}</p>
+
                                     {% else %}
                                         <p>Нет активной версии</p>
                                     {% endif %}
 
-                                {% endfor %}
+
 
                             </p>
                             {#  {% endif %} #}
