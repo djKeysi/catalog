@@ -15,7 +15,6 @@ class ProductForm(StyleFormMixin,forms.ModelForm):
 
     def clean_name(self):
         clean_data = self.cleaned_data['name'].lower()
-        print(clean_data)
         for forbidden_word in FORBIDDEN_WORDS:
             if forbidden_word in clean_data.split():
                 raise forms.ValidationError('Вы ввели запрещенное слово(введите нормальное имя продукта)')
