@@ -1,3 +1,4 @@
+from users.models import User
 from django.db import models
 
 NULLABLE = {'blank': True, 'null': True}
@@ -19,12 +20,13 @@ class Product(models.Model):
     name = models.CharField(max_length=100, verbose_name='Наименование')
     discription = models.TextField(max_length=200, verbose_name='Описание продукта')
     picture = models.ImageField(upload_to='pics/', **NULLABLE, verbose_name='Изображение')
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE,verbose_name='категория продукта')
     price_for_buy = models.IntegerField(verbose_name='цена за покупку')
     data_create = models.DateTimeField(auto_now_add=True, blank=True, verbose_name='дата создания')
     last_modified_date = models.DateTimeField(auto_now=True, blank=True,
                                               verbose_name='дата последнего изменения')  # c установкой при изменении
     phone = models.CharField(max_length=11, verbose_name='Телефон', **NULLABLE)
+    owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return f'{self.name}{self.discription}'
