@@ -1,4 +1,5 @@
 import random
+import secrets
 
 from django.conf import settings
 
@@ -20,6 +21,9 @@ from users.models import User,EmailVerification
 class LoginView(BaseLoginView):
     template_name = 'users/login.html'
 
+class VerifyView(TemplateView):
+    template_name = 'users/verify.html'
+
 
 class LogoutView(BaseLogoutView):
     pass
@@ -27,22 +31,47 @@ class LogoutView(BaseLogoutView):
 class RegisterView(CreateView):
     model = User
     form_class = UserRegisterForm
-    success_url = reverse_lazy('users:login')
+    success_url = reverse_lazy('users:verify')
     template_name = 'users/register.html'
 
+    #redirect(reverse('users:verify'))
+
+    #redirect('users/verify.html')
+
+
     # def form_valid(self, form):
-    #     #self.object = form.save()
-    #     new_user = form.save()
-    #     send_mail(
-    #         subject='Поздравляем с регистрацией',
-    #         message='Вы зарегистрировались на нашей платформе, добро пожаловать!',
-    #         from_email=settings.EMAIL_HOST_USER,
-    #         #recipient_list = [new_user.email, new_user.password]
-    #         recipient_list=[new_user.email]
+    #     if form.is_valid():
+    #         self.object = form.save(commit=False)
     #
+    #         #self.object = form.save()
     #
-    #     )
+    #         send_mail(
+    #             subject='Добро пожаловать',
+    #             message='на платформу',
+    #             from_email=settings.EMAIL_HOST_USER,
+    #             recipient_list=[self.object.email]
+    #         )
     #     return super().form_valid(form)
+
+
+    # def form_valid(self, form):
+    #     if form.is_valid():
+    #         self.object = form.save(commit=False)
+    #         code = secrets.token_urlsafe(nbytes=8)
+    #         self.object.is_verified_email = code
+    #         self.object.save()
+    #
+    #         url = reverse('users:verify',args=[code])
+    #         #servises.send_verify(url,self.object.email)
+    #         send_mail(url,self.object.email)
+    #
+    #     return super().form_valid(form)
+    #
+    # def verify():
+
+
+
+
 
 class UserUpdateView(UpdateView):
     model = User

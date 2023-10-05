@@ -15,12 +15,12 @@ class UserRegisterForm(StyleFormMixin,UserCreationForm):
         model = User
         fields=('email','password1','password2')
 
-    # def save(self, commit=True):
-    #     user = super(UserRegisterForm, self).save(commit=True)
-    #     expiration = now() + timedelta(hours=48)
-    #     record = EmailVerification.objects.create(code=uuid.uuid4(), user=user, expiration=expiration)
-    #     record.send_verification_email()
-    #     return user
+    def save(self, commit=True):
+        user = super(UserRegisterForm, self).save(commit=True)
+        expiration = now() + timedelta(hours=48)
+        record = EmailVerification.objects.create(code=uuid.uuid4(), user=user, expiration=expiration)
+        record.send_verification_email()
+        return user
 
 
 class UserForm(StyleFormMixin,UserChangeForm):
