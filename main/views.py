@@ -27,7 +27,7 @@ class ProductCreateView(CreateView):
     def form_valid(self, form):
         self.object = form.save()
         self.object.owner = self.request.user
-        self.object.save()1
+        self.object.save()
 
         return super().form_valid(form)
 
