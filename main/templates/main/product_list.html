@@ -7,47 +7,55 @@
             <a href="{% url 'main:product_create' %}" class="btn btn-primary mb-5"> Создать продукт</a>
         </div>
         <div class="row text-center">
+            {% if not user.is_authenticated %}
+                <div class="card-header">
+                        <h3 class="card-title">
+                            Нет информации
+                        </h3>
+                    </div>
+
+            {% else %}
+                {% for object in products %}
 
 
-            {% for object in products %}
+                    <div class="col-3">
+                        <div class="card mb-4 box-shadow">
+
+                            <div class="card-body">
+                                {# {% if object.is_active %} #}
+                                <p>
+                                    {{ object.name }}<br>
+                                    {{ object.discription | truncatechars:100 }}<br>
 
 
-                <div class="col-3">
-                    <div class="card mb-4 box-shadow">
+                                    {% if  object.active_version %}
+                                        <p>Активная версия: {{ object.active_version.name_version }}</p>
 
-                        <div class="card-body">
-                            {# {% if object.is_active %} #}
-                            <p>
-                                {{ object.name }}<br>
-                                {{ object.discription | truncatechars:100 }}<br>
+                                    {% else %}
 
-
-                                {% if  object.active_version %}
-                                    <p>Активная версия: {{ object.active_version.name_version }}</p>
-
-                                {% else %}
-
-                                    <p>Нет активной версии</p>
-                                {% endif %}
+                                        <p>Нет активной версии</p>
+                                    {% endif %}
 
 
-                            </p>
-                            {#  {% endif %} #}
+                                </p>
+                                {#  {% endif %} #}
 
-                            <div class="card-header">
-                                <a href="{% url 'main:category_products' object.pk %}" type="button"
-                                   class="btn btn-sm btn-outline-secondary">Просмотр продукта</a>
-                                <a href="{% url 'main:product_update' object.pk %}" type="button"
-                                   class="btn btn-sm btn-outline-secondary">Изменить продукт</a>
-                                <a href="{% url 'main:product_delete' object.pk %}" type="button"
-                                   class="btn btn-sm btn-outline-secondary">Удалить продукт</a>
+                                <div class="card-header">
+                                    <a href="{% url 'main:category_products' object.pk %}" type="button"
+                                       class="btn btn-sm btn-outline-secondary">Просмотр продукта</a>
+                                    <a href="{% url 'main:product_update' object.pk %}" type="button"
+                                       class="btn btn-sm btn-outline-secondary">Изменить продукт</a>
+                                    <a href="{% url 'main:product_delete' object.pk %}" type="button"
+                                       class="btn btn-sm btn-outline-secondary">Удалить продукт</a>
+
+                                </div>
 
                             </div>
-
                         </div>
                     </div>
-                </div>
-            {% endfor %}
+
+                {% endfor %}
+            {% endif %}
         </div>
     </div>
 

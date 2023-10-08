@@ -1,3 +1,5 @@
+from django.conf import settings
+
 from users.models import User
 from django.db import models
 
@@ -26,7 +28,7 @@ class Product(models.Model):
     last_modified_date = models.DateTimeField(auto_now=True, blank=True,
                                               verbose_name='дата последнего изменения')  # c установкой при изменении
     phone = models.CharField(max_length=11, verbose_name='Телефон', **NULLABLE)
-    owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE, verbose_name='user')
 
     def __str__(self):
         return f'{self.name}{self.discription}'

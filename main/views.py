@@ -3,7 +3,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
 from main.forms import ProductForm, VersionForm
-from main.models import  Product, Version
+from main.models import Product, Version
 
 
 class ProductListView(ListView):
@@ -26,8 +26,10 @@ class ProductCreateView(CreateView):
 
     def form_valid(self, form):
         self.object = form.save()
-        self.object.owner = self.request.user
+        self.object.user = self.request.user
         self.object.save()
+
+
 
         return super().form_valid(form)
 
