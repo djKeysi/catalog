@@ -24,7 +24,7 @@ load_dotenv(BASE_DIR / '.env')
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-1fw*(6ikaja0790sb%f5^2xwg$6l#pp&i3@4$r4o_(494ax+y*'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -83,9 +83,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'catalog',
-        'USER': 'postgres',
-        'PASSWORD': 128943
+        'NAME': os.getenv('NAME'),
+        'USER':  os.getenv('USER'),
+        'PASSWORD':  os.getenv('PASSWORD')
         # 'HOST':
         # 'PORT':5432
 
